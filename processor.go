@@ -15,7 +15,9 @@ type middlewareProcessor[R, S any] struct {
 	handlersChain HandlersChain[R, S]
 }
 
-func (b *middlewareProcessor[R, S]) Process(ctx context.Context, request R, response S) {
+// Process is a method of middlewareProcessor that processes the request and response
+// returns the status code and error
+func (b *middlewareProcessor[R, S]) Process(ctx context.Context, request R, response S) (int, error) {
 	if ctx == nil {
 		ctx = b.ctx
 	}
@@ -23,4 +25,6 @@ func (b *middlewareProcessor[R, S]) Process(ctx context.Context, request R, resp
 	rctx.logger = &b.logger
 	rctx.handlers = b.handlersChain
 	rctx.Next()
+
+	return rctx.statusCode, rctx.error
 }
