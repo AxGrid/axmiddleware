@@ -102,6 +102,10 @@ func (c *Context[R, S]) WithValue(key, val interface{}) *Context[R, S] {
 	return c
 }
 
+func (c *Context[R, S]) Set(key, val interface{}) *Context[R, S] {
+	return c.WithValue(key, val)
+}
+
 func (c *Context[R, S]) MustValue(key interface{}) interface{} {
 	val := c.Value(key)
 	if val == nil {

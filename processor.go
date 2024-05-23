@@ -6,7 +6,7 @@ import (
 )
 
 type MiddlewareProcessor[R, S any] interface {
-	Process(ctx context.Context, request R, response S)
+	Process(ctx context.Context, request R, response S) (int, error)
 }
 
 type middlewareProcessor[R, S any] struct {
