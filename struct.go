@@ -38,6 +38,10 @@ func (c *Context[P, S]) Response() S {
 	return c.response
 }
 
+func (c *Context[R, S]) SetResponse(response S) {
+	c.response = response
+}
+
 func (c *Context[R, S]) GetError() error {
 	return c.error
 }
